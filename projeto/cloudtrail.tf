@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "bucket" {
-  bucket        = "meu-bucket-cloudtrail"
+  bucket        = "joao-pazotti-bucket"
   force_destroy = true
 }
 

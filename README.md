@@ -29,13 +29,15 @@ Para efetivamente implementar a infraestrutura Cloud_EKS, é necessário satisfa
 
 No Visual Studio Code, abra o projeto e substitua a linha `key_name = "teste"` por `key_name = "nome_do_seu_key_pair"` no arquivo `eks.tf`.
 
+Também no Visual Studio Code, substitua a linha `bucket = "joao-pazotti-bucket"` por `bucket        = "nome-do-seu-bucket"` no arquivo `cloudtrail.tf`. IMPORTANTE: o nome dado ao seu bucket tem que ser único na AWS, portanto, de um nome para seu bucket que seja dificil de alguem além de voce ter dado.
+
 Ao finalizar estas etapas, execute os comandos abaixo em ordem:
 
 - `$ terraform init`
 - `$ terraform plan`
 - `$ terraform apply`
 
-Logo após a execução destes comandos, é necessário modificar o arquivo `kubeconfig_my-eks-cluster`:
+Logo após a execução destes comandos, é necessário modificar o arquivo `kubeconfig_my-eks-cluster` no Visual Studio Code:
 
 O conteúdo original da linha será: `apiVersion: client.authentication.k8s.io/v1alpha1`.
 
