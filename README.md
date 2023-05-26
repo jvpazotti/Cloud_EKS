@@ -6,8 +6,57 @@ Para realizar a implementação da infraestrutura EKS na nuvem, é necessário c
 - Ter AWS IAM Authenticator
 - Dispor de Kubectl
 - Ter Terraform
-- Configurar um Key Pair na AWS
 - Instalar Visual Studio Code
+
+## Explicando a infraestrutura
+
+Os arquivos de configuração Terraform descritos são usados para criar uma infraestrutura na AWS, incluindo um cluster EKS, dois buckets S3, um rastro de auditoria CloudTrail, um usuário IAM, um papel IAM, um grupo de segurança, uma tabela DynamoDB e uma VPC.
+
+Vamos para a explicação detalhada de cada arquivo:
+
+- main.tf: Define os provedores para o Terraform. Há dois provedores definidos: AWS e Kubernetes. O provedor AWS permite a interação com a infraestrutura da AWS, enquanto o provedor Kubernetes é usado para a interação com o cluster EKS criado.
+
+- eks.tf: Este arquivo cria um cluster EKS na AWS. Define o nome do cluster, a versão do cluster, as sub-redes nas quais os nós do cluster devem ser criados e o tipo de instância dos nós.
+
+- cloudtrail.tf: Este arquivo cria duas buckets S3, um rastro de auditoria CloudTrail, um usuário IAM, um papel IAM, um grupo de segurança e uma tabela DynamoDB. O CloudTrail é usado para registrar atividades de API na AWS. O arquivo também define políticas para permitir que o CloudTrail armazene logs em uma das buckets S3.
+
+- iam.tf: Este arquivo cria um papel IAM que pode ser assumido pelo serviço EKS.
+
+- variable.tf: Este arquivo define as variáveis que podem ser usadas em todos os arquivos Terraform. Define a região onde os recursos devem ser criados e o nome do cluster EKS.
+
+- vpc.tf: Este arquivo cria uma VPC, incluindo sub-redes públicas e privadas, uma NAT Gateway e uma VPN Gateway.
+
+Aqui está um diagrama básico da infraestrutura:
+{
++------------------+     +------------------+
+|                  |     |                  |
+|      VPC         |     |   EKS Cluster   |
+|  (from vpc.tf)   |     |   (from eks.tf) |
+|                  |     |                  |
++---------^--------+     +---------^--------+
+          |                          |
+          |                          |
+          |                          |
+          |                          |
+          v                          v
++---------+--------+     +-------------------+
+|                  |     |                   |
+|   S3 Buckets     |     |  DynamoDB Table   |
+| (from cloudtrail.tf)  |  (from cloudtrail.tf)|
+|                  |     |                   |
++---------^--------+     +---------^--------+
+          |                          |
+          |                          |
+          |                          |
+          |                          |
+          v                          v
++---------+--------+     +------------------+
+|                  |     |                  |
+|   IAM User       |     |  IAM Role        |
+| (from cloudtrail.tf)  |  (from iam.tf)   |
+|                  |     |                  |
++------------------+     +------------------+
+}
 
 ## Guia Passo a Passo para Instalação e Configuração do AWS CLI, Terraform e Kubectl:
 
