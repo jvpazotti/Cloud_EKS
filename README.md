@@ -79,7 +79,7 @@ NAME            TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)        A
 kubernetes      ClusterIP      xxx.xx.x.x      <none>           xxx/TCP        39m
 nginx-service   LoadBalancer   xxx.xx.xx.xxx   link_pro_seu_servico  xx:xxxxx/TCP   5s
 
-Para visualizar o aplicativo, utilize o link da AWS fornecido no campo *EXTERNAL-IP* do comando anterior.
+Para visualizar o aplicativo, utilize o link da AWS fornecido no campo *EXTERNAL-IP* do comando anterior.Lembrando que demora um pouco para o link funcionar, então se não abrir de primeira, não se desespere!
 
 Parabéns! Seu aplicativo NGINX está agora rodando em seu cluster EKS.
 
@@ -90,6 +90,18 @@ Você também pode usar o CloudTrail para monitorar seu cluster EKS através do 
 `aws cloudtrail describe-trails`
 
 - Para visualizar os logs do CloudTrail:
+
+`aws s3 ls s3://nome_do_seu_bucket/AWSLogs/account_id/CloudTrail/region/YYYY/MM/DD/`
+
+Caso você não saiba alguma dessas informações acima você pode usar este comando:
+
+`aws s3 ls s3://nome_do_seu_bucket/AWSLogs`
+
+O output deste comando será o próximo diretório a ser adicionado a linha de comando, então ficaria:
+
+`aws s3 ls s3://nome_do_seu_bucket/AWSLogs/output/`
+
+E continua assim até chegar neste formato:
 
 `aws s3 ls s3://nome_do_seu_bucket/AWSLogs/account_id/CloudTrail/region/YYYY/MM/DD/`
 

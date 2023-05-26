@@ -14,7 +14,7 @@ module "eks" {
       min_capacity     = 1
 
       instance_type = "t3.medium"
-      key_name      = "chave_nova" # substitua pelo nome da sua chave
+      key_name      = "teste" # substitua pelo nome da sua chave
 
       additional_tags = {
         Environment = "test"
