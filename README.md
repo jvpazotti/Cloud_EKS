@@ -14,49 +14,17 @@ Os arquivos de configuração Terraform descritos são usados para criar uma inf
 
 Vamos para a explicação detalhada de cada arquivo:
 
-- main.tf: Define os provedores para o Terraform. Há dois provedores definidos: AWS e Kubernetes. O provedor AWS permite a interação com a infraestrutura da AWS, enquanto o provedor Kubernetes é usado para a interação com o cluster EKS criado.
+- **main.tf**: Define os provedores para o Terraform. Há dois provedores definidos: AWS e Kubernetes. O provedor AWS permite a interação com a infraestrutura da AWS, enquanto o provedor Kubernetes é usado para a interação com o cluster EKS criado.
 
-- eks.tf: Este arquivo cria um cluster EKS na AWS. Define o nome do cluster, a versão do cluster, as sub-redes nas quais os nós do cluster devem ser criados e o tipo de instância dos nós.
+- **eks.tf**: Este arquivo cria um cluster EKS na AWS. Define o nome do cluster, a versão do cluster, as sub-redes nas quais os nós do cluster devem ser criados e o tipo de instância dos nós.
 
-- cloudtrail.tf: Este arquivo cria duas buckets S3, um rastro de auditoria CloudTrail, um usuário IAM, um papel IAM, um grupo de segurança e uma tabela DynamoDB. O CloudTrail é usado para registrar atividades de API na AWS. O arquivo também define políticas para permitir que o CloudTrail armazene logs em uma das buckets S3.
+- **cloudtrail.tf**: Este arquivo cria duas buckets S3, um rastro de auditoria CloudTrail, um usuário IAM, um papel IAM, um grupo de segurança e uma tabela DynamoDB. O CloudTrail é usado para registrar atividades de API na AWS. O arquivo também define políticas para permitir que o CloudTrail armazene logs em uma das buckets S3.
 
-- iam.tf: Este arquivo cria um papel IAM que pode ser assumido pelo serviço EKS.
+- **iam.tf**: Este arquivo cria um papel IAM que pode ser assumido pelo serviço EKS.
 
-- variable.tf: Este arquivo define as variáveis que podem ser usadas em todos os arquivos Terraform. Define a região onde os recursos devem ser criados e o nome do cluster EKS.
+- **variable.tf**: Este arquivo define as variáveis que podem ser usadas em todos os arquivos Terraform. Define a região onde os recursos devem ser criados e o nome do cluster EKS.
 
-- vpc.tf: Este arquivo cria uma VPC, incluindo sub-redes públicas e privadas, uma NAT Gateway e uma VPN Gateway.
-
-Aqui está um diagrama básico da infraestrutura:
-```
-+------------------+     +------------------+
-|                  |     |                  |
-|      VPC         |     |   EKS Cluster   |
-|  (from vpc.tf)   |     |   (from eks.tf) |
-|                  |     |                  |
-+---------^--------+     +---------^--------+
-          |                          |
-          |                          |
-          |                          |
-          |                          |
-          v                          v
-+---------+--------+     +-------------------+
-|                  |     |                   |
-|   S3 Buckets     |     |  DynamoDB Table   |
-| (from cloudtrail.tf)  |  (from cloudtrail.tf)|
-|                  |     |                   |
-+---------^--------+     +---------^--------+
-          |                          |
-          |                          |
-          |                          |
-          |                          |
-          v                          v
-+---------+--------+     +------------------+
-|                  |     |                  |
-|   IAM User       |     |  IAM Role        |
-| (from cloudtrail.tf)  |  (from iam.tf)   |
-|                  |     |                  |
-+------------------+     +------------------+
-```
+- **vpc.tf**: Este arquivo cria uma VPC, incluindo sub-redes públicas e privadas, uma NAT Gateway e uma VPN Gateway.
 
 ## Guia Passo a Passo para Instalação e Configuração do AWS CLI, Terraform e Kubectl:
 
@@ -73,6 +41,8 @@ Aqui está um diagrama básico da infraestrutura:
 6. Instale o Kubectl seguindo as instruções detalhadas encontradas aqui: [Instalar Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
 7. Por último, instale o Visual Studio Code a partir do seguinte link: [Instalar Visual Studio Code](https://code.visualstudio.com/download).
+
+## Montando a infraestrutura:
 
 Após a instalação das ferramentas necessárias, você deverá criar seu key pair no EC2 por meio do comando abaixo:
 
