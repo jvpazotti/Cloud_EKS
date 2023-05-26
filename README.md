@@ -80,10 +80,10 @@ Para lançar a aplicação de teste (neste caso, o NGINX), utilize este comando:
 Após a execução, a aplicação será hospedada na AWS. Para confirmar, acesse o site da AWS ou utilize o AWS CLI com o comando `kubectl get pods`.
 
 Se tudo estiver correto, o retorno será algo como:
-
+```
 NAME                                READY   STATUS    RESTARTS   AGE
 nginx-deployment-xxxxx   1/1     Running   0          66s
-
+```
 Para disponibilizar e usar o seu serviço, aplique o seguinte comando:
 
 `kubectl apply -f service.yaml`
@@ -93,12 +93,12 @@ Em seguida, verifique se o serviço do seu aplicativo está ativo com o seguinte
 `kubectl get services`
 
 A saída será algo parecido com isso:
-
+```
 NAME            TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)        AGE
 kubernetes      ClusterIP      xxx.xx.x.x      <none>           xxx/TCP        39m
 nginx-service   LoadBalancer   xxx.xx.xx.xxx   link_pro_seu_servico  xx:xxxxx/TCP   5s
-
-Para visualizar o aplicativo, utilize o link da AWS fornecido no campo *EXTERNAL-IP* do comando anterior.Lembrando que demora um pouco para o link funcionar, então se não abrir de primeira, não se desespere!
+```
+Para visualizar o aplicativo, utilize o link da AWS fornecido no campo **EXTERNAL-IP** do comando anterior.Lembrando que demora um pouco para o link funcionar, então se não abrir de primeira, não se desespere!
 
 Parabéns! Seu aplicativo NGINX está agora rodando em seu cluster EKS.
 
