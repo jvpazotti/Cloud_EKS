@@ -27,7 +27,7 @@ Vamos para a explicação detalhada de cada arquivo:
 - vpc.tf: Este arquivo cria uma VPC, incluindo sub-redes públicas e privadas, uma NAT Gateway e uma VPN Gateway.
 
 Aqui está um diagrama básico da infraestrutura:
-{
+```
 +------------------+     +------------------+
 |                  |     |                  |
 |      VPC         |     |   EKS Cluster   |
@@ -56,7 +56,7 @@ Aqui está um diagrama básico da infraestrutura:
 | (from cloudtrail.tf)  |  (from iam.tf)   |
 |                  |     |                  |
 +------------------+     +------------------+
-}
+```
 
 ## Guia Passo a Passo para Instalação e Configuração do AWS CLI, Terraform e Kubectl:
 
